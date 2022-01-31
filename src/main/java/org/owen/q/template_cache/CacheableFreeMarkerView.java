@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.owen.q.template_cache;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -19,27 +19,24 @@ import freemarker.template.TemplateException;
 
 @Slf4j
 public class CacheableFreeMarkerView extends FreeMarkerView {
-    public static RequestScopeCacheMetaData requestScopeCacheMetaData = new RequestScopeCacheMetaData();
+//    public static RequestScopeTemplateViewCacheMetaData requestScopeTemplateViewCacheMetaData = new RequestScopeTemplateViewCacheMetaData();
 
     @Override
     protected void renderMergedTemplateModel(Map<String, Object> model, HttpServletRequest request,
                                              HttpServletResponse response) throws Exception {
-        requestScopeCacheMetaData.remove();
-        CacheMetadata cacheMetadata = requestScopeCacheMetaData.get();
+        TemplateViewCacheMetadata templateViewCacheMetadata = RequestScopeTemplateViewCacheMetaData.get();
+        templateViewCacheMetadata.setCacheKey(buildCacheKey(getBeanName(), model));
 
-        cacheMetadata.setKey(buildCacheKey(getBeanName(), model));
-        String cachedRenderContents = CacheableViewRenderer.get(cacheMetadata.getKey());
+        String cachedRenderContents = CacheableViewRenderer.get(templateViewCacheMetadata.getCacheKey());
 
         if (isBlank(cachedRenderContents)) {
-            log.info("[Render] using freemarker rendering");
+            log.info("[Render] render view. view={}", cachedRenderContents);
             super.renderMergedTemplateModel(model, request, response);
-            CacheableViewRenderer.set(cacheMetadata.getKey(), cacheMetadata.getContent());
+            CacheableViewRenderer.set(templateViewCacheMetadata.getCacheKey(), templateViewCacheMetadata.getRenderedViewContent());
         } else {
-            log.info("[Render] using cached view");
+            log.info("[Render] using cached view. view={}", cachedRenderContents);
             response.getWriter().write(cachedRenderContents);
         }
-
-        requestScopeCacheMetaData.remove();
     }
 
     private int length(final CharSequence cs) {
@@ -69,7 +66,7 @@ public class CacheableFreeMarkerView extends FreeMarkerView {
         template.process(model, writer);
 
         String content = writer.toString();
-        requestScopeCacheMetaData.get().setContent(content);
+        RequestScopeTemplateViewCacheMetaData.setRenderedContent(content);
 
         // send response
         response.getWriter().write(content);

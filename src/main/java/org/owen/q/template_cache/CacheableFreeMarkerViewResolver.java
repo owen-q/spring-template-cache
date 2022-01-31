@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.owen.q.template_cache;
 
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
