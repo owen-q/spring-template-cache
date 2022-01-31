@@ -2,8 +2,8 @@ package org.owen.q.template_cache.demo;
 
 import java.util.concurrent.TimeUnit;
 
-import org.owen.q.template_cache.CacheableFreeMarkerViewResolver;
-import org.owen.q.template_cache.CaffeineTemplateViewCache;
+import org.owen.q.template_cache.config.CacheableFreeMarkerViewResolver;
+import org.owen.q.template_cache.cache.impl.CaffeineTemplateViewCache;
 import org.owen.q.template_cache.cache.TemplateViewCacheable;
 import org.owen.q.template_cache.config.TemplateViewCacheConfiguration;
 import org.owen.q.template_cache.config.TemplateViewCacheOptions;

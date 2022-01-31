@@ -1,7 +1,7 @@
 package org.owen.q.template_cache.config;
 
-import org.owen.q.template_cache.CacheableViewRenderer;
-import org.owen.q.template_cache.TemplateCacheFinalizer;
+import org.owen.q.template_cache.core.CacheableViewRenderer;
+import org.owen.q.template_cache.core.TemplateCacheFinalizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
