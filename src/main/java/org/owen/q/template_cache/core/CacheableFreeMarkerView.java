@@ -33,12 +33,14 @@ public class CacheableFreeMarkerView extends FreeMarkerView {
             if (log.isDebugEnabled()) {
                 log.debug("[Render] render view. view={}", cachedRenderContents);
             }
+
             super.renderMergedTemplateModel(model, request, response);
             CacheableViewRenderer.set(templateViewCacheMetadata.getCacheKey(), templateViewCacheMetadata.getRenderedViewContent());
         } else {
             if (log.isDebugEnabled()) {
                 log.debug("[Render] using cached view. view={}", cachedRenderContents);
             }
+
             response.getWriter().write(cachedRenderContents);
         }
     }

@@ -21,7 +21,7 @@ public class SampleController {
     public ModelAndView aaa() {
         Map<String, Object> models = new HashMap<>();
 
-        models.put("age", 20);
+        models.put("age", 10);
         models.put("name", "owen.qqq");
 
         return new ModelAndView("main", models);

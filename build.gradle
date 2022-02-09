@@ -1,7 +1,9 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+//	id 'java'
+	id 'maven-publish'
+	id 'java-library'
 }
 
 group = 'org.owen.cache'
@@ -32,4 +34,62 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+jar {
+	enabled = true
+}
+
+bootJar {
+	enabled = false
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId = 'org.owen.cache'
+			artifactId = 'template-cache'
+			version = "1.0"
+			from components.java
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+			pom {
+				name = 'My Library'
+				description = 'A concise description of my library'
+				url = 'http://www.example.com/library'
+				developers {
+					developer {
+						id = 'owen.qq'
+						name = 'owen'
+						email = 'owen.q.dev@gmail.com'
+					}
+				}
+				scm {
+					connection = 'scm:git:git://example.com/my-library.git'
+					developerConnection = 'scm:git:ssh://example.com/my-library.git'
+					url = 'http://example.com/my-library/'
+				}
+			}
+			artifact 'template-cache-1.0.jar'
+		}
+	}
+
+	repositories {
+		maven {
+			// change URLs to point to your repos, e.g. http://my.org/repo
+			def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+			def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			credentials {
+				username = "$usr"
+				password = "$pwd"
+			}
+		}
+	}
 }
