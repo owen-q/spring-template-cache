@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.owen.q.template_cache.exception.TemplateCacheException;
 import org.owen.q.template_cache.model.TemplateViewCacheMetadata;
 import org.owen.q.template_cache.util.StringUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
@@ -58,7 +57,7 @@ public class CacheableFreeMarkerView extends FreeMarkerView {
         try {
             RequestScopeTemplateViewCacheMetaData.setRenderedContent(content);
         } catch(Exception e){
-            throw new TemplateCacheException(e);
+            log.error("Fail to caching freemarker view, cause={}", e.getMessage());
         }
 
         // send response

@@ -1,13 +1,13 @@
 plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-//	id 'java'
 	id 'maven-publish'
 	id 'java-library'
+	id 'signing'
 }
 
-group = 'org.owen.cache'
-version = '0.0.1-SNAPSHOT'
+group = 'io.github.owen-q'
+version = '1.1'
 sourceCompatibility = '11'
 
 repositories {
@@ -44,12 +44,16 @@ bootJar {
 	enabled = false
 }
 
+signing {
+	sign publishing.publications
+}
+
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId = 'org.owen.cache'
-			artifactId = 'template-cache'
-			version = "1.0"
+			groupId = 'io.github.owen-q'
+			artifactId = 'spring-template-cache'
+			version = "1.1"
 			from components.java
 			versionMapping {
 				usage('java-api') {
@@ -60,9 +64,8 @@ publishing {
 				}
 			}
 			pom {
-				name = 'My Library'
-				description = 'A concise description of my library'
-				url = 'http://www.example.com/library'
+				name = 'spring-template-cache'
+				description = 'Spring Freemarker view cache'
 				developers {
 					developer {
 						id = 'owen.qq'
@@ -70,13 +73,12 @@ publishing {
 						email = 'owen.q.dev@gmail.com'
 					}
 				}
-				scm {
-					connection = 'scm:git:git://example.com/my-library.git'
-					developerConnection = 'scm:git:ssh://example.com/my-library.git'
-					url = 'http://example.com/my-library/'
-				}
+//				scm {
+//					connection = 'scm:git:git://example.com/my-library.git'
+//					developerConnection = 'scm:git:ssh://example.com/my-library.git'
+//					url = 'http://example.com/my-library/'
+//				}
 			}
-			artifact 'template-cache-1.0.jar'
 		}
 	}
 
@@ -85,7 +87,8 @@ publishing {
 			// change URLs to point to your repos, e.g. http://my.org/repo
 			def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
 			def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
-			url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			url = version.endsWith('SNAPSHOT') ? "https://s01.oss.sonatype.org/content/repositories/snapshots/" : "https://s01.oss.sonatype.org/content/repositories/releases/"
+
 			credentials {
 				username = "$usr"
 				password = "$pwd"
