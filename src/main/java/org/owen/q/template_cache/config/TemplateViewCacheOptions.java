@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class TemplateViewCacheOptions {
+    private boolean useAsyncSet;
     private boolean useEvict;
     private Long expireAfterWriteDuration;
     private TimeUnit expireAfterWriteDurationUnit;
@@ -21,9 +22,10 @@ public class TemplateViewCacheOptions {
     private Executor customExecutor;
 
     @Builder
-    public TemplateViewCacheOptions(boolean useEvict, Long expireAfterWriteDuration,
+    public TemplateViewCacheOptions(boolean useAsyncSet, boolean useEvict, Long expireAfterWriteDuration,
                                     TimeUnit expireAfterWriteDurationUnit, Long maximumSize,
                                     Executor customExecutor) {
+        this.useAsyncSet = useAsyncSet;
         this.useEvict = useEvict;
         this.expireAfterWriteDuration = expireAfterWriteDuration;
         this.expireAfterWriteDurationUnit = expireAfterWriteDurationUnit;

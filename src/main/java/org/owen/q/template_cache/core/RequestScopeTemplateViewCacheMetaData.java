@@ -1,6 +1,8 @@
-package org.owen.q.template_cache;
+package org.owen.q.template_cache.core;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.owen.q.template_cache.model.TemplateViewCacheMetadata;
 
 @Slf4j
 public class RequestScopeTemplateViewCacheMetaData {

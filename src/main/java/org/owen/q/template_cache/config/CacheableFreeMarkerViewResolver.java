@@ -1,5 +1,6 @@
-package org.owen.q.template_cache;
+package org.owen.q.template_cache.config;
 
+import org.owen.q.template_cache.core.CacheableFreeMarkerView;
 import org.springframework.web.servlet.view.AbstractTemplateViewResolver;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;

@@ -1,7 +1,9 @@
 package org.owen.q.template_cache.config;
 
-import org.owen.q.template_cache.CacheableViewRenderer;
-import org.owen.q.template_cache.TemplateCacheFinalizer;
+import org.owen.q.template_cache.cache.impl.TemplateCacheDefaultKeyGenerator;
+import org.owen.q.template_cache.core.CacheableViewRenderer;
+import org.owen.q.template_cache.core.TemplateCacheFinalizer;
+import org.owen.q.template_cache.core.TemplateCacheKeyBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,4 +29,14 @@ public class TemplateViewCacheConfiguration {
 //    public TemplateViewCacheable viewCacheable(TemplateViewCacheOptions configuration) {
 //        return new CaffeineTemplateViewCache(configuration);
 //    }
+
+    @Bean
+    public TemplateCacheDefaultKeyGenerator templateCacheDefaultKeyGenerator() {
+        return new TemplateCacheDefaultKeyGenerator();
+    }
+
+    @Bean
+    public TemplateCacheKeyBuilder templateCacheKeyBuilder() {
+        return new TemplateCacheKeyBuilder();
+    }
 }

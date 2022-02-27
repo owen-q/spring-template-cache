@@ -1,4 +1,4 @@
-package org.owen.q.template_cache;
+package org.owen.q.template_cache.core;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

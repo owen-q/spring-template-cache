@@ -1,4 +1,4 @@
-package org.owen.q.template_cache;
+package org.owen.q.template_cache.model;
 
 import lombok.Getter;
 import lombok.Setter;
