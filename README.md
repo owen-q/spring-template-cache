@@ -10,8 +10,6 @@ If your system confront high TPS and try spring-template-cache
 
 ## Getting Started
 
-### Create Configuration
-
 ### Add dependencies 
 build.gradle
 ```groovy
@@ -22,6 +20,7 @@ dependencies {
 }
 ```
 
+### Create Configuration
 ```java
 
 @Import({ TemplateViewCacheConfiguration.class })
